@@ -30,16 +30,57 @@ And below is an example of what the data in a log file, 2018-11-12-events.json, 
 Implemented star schema which optimized song play analysis. This includes the following tables:
 #### Fact Table:
 1. songplays: records in log data associated with song plays i.e. records with page NextSong
-  - *songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent*
+  - schema:
+  ```
+    songplay_id    - PRIMARY KEY
+    start_time     - REFERENCES time (start_time)
+    user_id        - REFERENCES users (user_id)
+    level
+    song_id        - REFERENCES songs (song_id)
+    artist_id      - REFERENCES artists (artist_id)
+    session_id
+    location
+    user_agent
+  ```
 #### Dimension Tables:
 2. users: users profile in the app
-  - *user_id, first_name, last_name, gender, level*
+  - schema:
+  ```
+  user_id          - PRIMARY KEY
+  first_name
+  last_name
+  gender
+  level
+  ```
 3. songs: songs in music database
-  - *song_id, title, artist_id, year, duration*
+  - schema:
+  ```
+  song_id          - PRIMARY KEY
+  title
+  artist_id
+  year
+  duration
+  ```
 4. artists: artists in music database
-  - *artist_id, name, location, latitude, longitude*
+  - schema:
+  ```
+  artist_id        - PRIMARY KEY
+  name
+  location
+  latitude
+  longitude
+  ```
 5. time: timestamps of records in songplays broken down into specific units
-  - *start_time, hour, day, week, month, year, weekday*
+  - schema:
+  ```
+  start_time       - PRIMARY KEY
+  hour
+  day
+  week
+  month
+  year
+  weekday
+  ```
 ## Files in the project
 1. sql_queries.py: has all the sql code for drop, create table and insert data
 2. create_tables.py: implements the sql code from sql_queries.py to drop and create tables
